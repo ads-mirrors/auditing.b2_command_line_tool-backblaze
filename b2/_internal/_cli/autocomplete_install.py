@@ -18,6 +18,7 @@ import shlex
 import shutil
 import signal
 import subprocess
+import sys
 import textwrap
 from datetime import datetime
 from importlib.util import find_spec
@@ -229,7 +230,7 @@ class FishAutocompleteInstaller(ShellAutocompleteInstaller):
 def _silent_success_run_with_tty(
     cmd: list[str], timeout: int = 30, env: dict | None = None
 ) -> bool:
-    emulate_tty = not os.isatty(0)  # is True under GHA or pytest-xdist
+    emulate_tty = not sys.stdin.isatty()  # is True under GHA or pytest-xdist
     if emulate_tty and not find_spec('pexpect'):
         emulate_tty = False
         logger.warning(

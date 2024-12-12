@@ -76,7 +76,7 @@ nox.options.sessions = [
 
 PYTEST_GLOBAL_ARGS = []
 if CI:
-    PYTEST_GLOBAL_ARGS.append("-vv")
+    PYTEST_GLOBAL_ARGS.extend(["--log-cli-level=DEBUG", "-vv"])
 
 
 def pdm_install(
